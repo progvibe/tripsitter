@@ -2,7 +2,9 @@
   "name": "@tripsitter/core",
   "version": "0.0.0",
   "scripts": {
-    "test": "sst shell vitest"
+    "db": "sst shell drizzle-kit",
+    "db:push": "sst shell drizzle-kit push",
+    "db:connect": "sst shell ../scripts/mysql"
   },
   "exports": {
     "./*": [
@@ -11,7 +13,11 @@
     ]
   },
   "dependencies": {
-    "sst": "*"
+    "@hono/zod-openapi": "^0.16.0",
+    "hono": "^4.6.2",
+    "sst": "*",
+    "ulid": "^2.3.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "vitest": "^2.0.3"

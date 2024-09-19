@@ -2,8 +2,8 @@ import { Resource } from "sst";
 import { Handler } from "aws-lambda";
 
 import { logger } from "hono/logger";
-import { OpenAPIHono } from "@hono/zod-openapi";
 import { handle, streamHandle } from "hono/aws-lambda";
+import { Hono } from "hono";
 
 //export const handler: Handler = async (_event) => {
 //  const testString = "Hello world";
@@ -13,11 +13,14 @@ import { handle, streamHandle } from "hono/aws-lambda";
 //  };
 //};
 
-const app = new OpenAPIHono();
+const app = new Hono();
 
-const routes = app.route("/user", UserApi.route).onError((error, c) => {
-  console.error(error);
+app.get("/", (c) => {
+  return c.text("Hono world");
 });
 
-export type Routes = typeof routes;
+// const routes = app.route("/user", UserApi.route).onError((error, c) => {
+//   console.error(error);
+// });
+
 export const handler = handle(app);
