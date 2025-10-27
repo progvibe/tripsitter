@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache"
 import { db } from "@/lib/db"
 import { trips, tripMembers } from "@/lib/db/schema"
 import { getCurrentUser } from "@/lib/auth/get-current-user"
-import { eq } from "drizzle-orm"
+import { and, eq } from "drizzle-orm"
 
 function generateInviteCode(): string {
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -90,4 +90,65 @@ export async function joinTrip(formData: FormData) {
   revalidatePath("/dashboard")
 
   return { success: true, tripId: trip.id }
+}
+
+export async function updateTrip(formData: FormData) {
+  const user = await getCurrentUser()
+
+  if (!user) {
+    return { success: false, error: "Unauthorized" }
+  }
+
+  const tripId = formData.get("tripId") as string | null
+
+  if (!tripId) {
+    return { success: false, error: "Trip ID is required" }
+  }
+
+  const membership = await db.query.tripMembers.findFirst({
+    where: and(eq(tripMembers.tripId, tripId), eq(tripMembers.userId, user.id)),
+  })
+
+  if (!membership) {
+    return { success: false, error: "Not a trip member" }
+  }
+
+  if (membership.role !== "owner") {
+    return { success: false, error: "Only trip owners can update settings" }
+  }
+
+  const trip = await db.query.trips.findFirst({
+    where: eq(trips.id, tripId),
+  })
+
+  if (!trip) {
+    return { success: false, error: "Trip not found" }
+  }
+
+  const name = formData.get("name") as string | null
+  const destination = formData.get("destination") as string | null
+  const description = formData.get("description") as string | null
+  const startDate = formData.get("startDate") as string | null
+  const endDate = formData.get("endDate") as string | null
+
+  if (!name) {
+    return { success: false, error: "Trip name is required" }
+  }
+
+  await db
+    .update(trips)
+    .set({
+      name,
+      destination: destination || null,
+      description: description || null,
+      startDate: startDate ? new Date(startDate) : null,
+      endDate: endDate ? new Date(endDate) : null,
+      updatedAt: new Date(),
+    })
+    .where(eq(trips.id, tripId))
+
+  revalidatePath(`/trip/${tripId}`)
+  revalidatePath("/dashboard")
+
+  return { success: true }
 }

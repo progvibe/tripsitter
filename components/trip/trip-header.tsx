@@ -7,14 +7,17 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { useState } from "react"
 import { ShareTripDialog } from "./share-trip-dialog"
 import { OnlineUsers } from "./online-users"
+import { TripSettingsDialog } from "./trip-settings-dialog"
 
 interface TripHeaderProps {
   trip: {
     id: string
     name: string
     destination: string | null
+    description: string | null
     startDate: Date | null
     endDate: Date | null
+    createdById: string
     inviteCode: string
     members: Array<{
       user: {
@@ -31,6 +34,9 @@ interface TripHeaderProps {
 
 export function TripHeader({ trip, user }: TripHeaderProps) {
   const [shareOpen, setShareOpen] = useState(false)
+  const [settingsOpen, setSettingsOpen] = useState(false)
+
+  const isOwner = trip.createdById === user.id
 
   const formatDateRange = () => {
     if (!trip.startDate || !trip.endDate) return null
@@ -88,7 +94,7 @@ export function TripHeader({ trip, user }: TripHeaderProps) {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem>Trip Settings</DropdownMenuItem>
+                <DropdownMenuItem onSelect={() => setSettingsOpen(true)}>Trip Settings</DropdownMenuItem>
                 <DropdownMenuItem>Manage Members</DropdownMenuItem>
                 <DropdownMenuItem className="text-destructive">Leave Trip</DropdownMenuItem>
               </DropdownMenuContent>
@@ -98,6 +104,7 @@ export function TripHeader({ trip, user }: TripHeaderProps) {
       </header>
 
       <ShareTripDialog open={shareOpen} onOpenChange={setShareOpen} inviteCode={trip.inviteCode} />
+      <TripSettingsDialog open={settingsOpen} onOpenChange={setSettingsOpen} trip={trip} canEdit={isOwner} />
     </>
   )
 }
