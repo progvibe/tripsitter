@@ -27,7 +27,7 @@ export default function LandingPage() {
       <section className="container mx-auto px-4 py-24 md:py-32">
         <div className="mx-auto max-w-4xl text-center">
           <h1 className="text-balance text-5xl font-bold leading-tight tracking-tight md:text-6xl lg:text-7xl">
-            Plan trips together with your team
+            Plan trips together
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg text-muted-foreground md:text-xl">
             Collaborate in real-time, organize your itinerary, and get AI-powered suggestions. Everything you need to
