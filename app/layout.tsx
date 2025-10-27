@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Trip Planner - Collaborate on Your Next Adventure",
-  description: "Plan trips together with real-time collaboration and AI assistance",
+  title: "TripSitter - Collaborate on Your Next Adventure",
+  description: "TripSitter helps you plan trips together with real-time collaboration and AI assistance",
     generator: 'v0.app'
 }
 

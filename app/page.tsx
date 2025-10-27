@@ -10,7 +10,7 @@ export default function LandingPage() {
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
           <div className="flex items-center gap-2">
             <Calendar className="h-6 w-6" />
-            <span className="text-xl font-bold">TripPlanner</span>
+            <span className="text-xl font-bold">TripSitter</span>
           </div>
           <nav className="flex items-center gap-4">
             <Link href="/sign-in">
@@ -110,9 +110,9 @@ export default function LandingPage() {
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             <div className="flex items-center gap-2">
               <Calendar className="h-5 w-5" />
-              <span className="font-semibold">TripPlanner</span>
+              <span className="font-semibold">TripSitter</span>
             </div>
-            <p className="text-sm text-muted-foreground">© 2025 TripPlanner. All rights reserved.</p>
+            <p className="text-sm text-muted-foreground">© 2025 TripSitter. All rights reserved.</p>
           </div>
         </div>
       </footer>

@@ -15,7 +15,7 @@ export function DashboardHeader({ user }: DashboardHeaderProps) {
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link href="/dashboard" className="flex items-center gap-2">
           <Calendar className="h-6 w-6" />
-          <span className="text-xl font-bold">TripPlanner</span>
+          <span className="text-xl font-bold">TripSitter</span>
         </Link>
         <div className="flex items-center gap-4">
           <div className="hidden text-right sm:block">
