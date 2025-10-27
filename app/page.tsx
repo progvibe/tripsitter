@@ -1,18 +1,20 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Users, Calendar, MessageSquare, Sparkles } from "lucide-react"
+import { TopBar } from "@/components/top-bar"
 
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b border-border">
-        <div className="container mx-auto flex h-16 items-center justify-between px-4">
-          <div className="flex items-center gap-2">
+      <TopBar
+        leftSlot={
+          <>
             <Calendar className="h-6 w-6" />
             <span className="text-xl font-bold">TripSitter</span>
-          </div>
-          <nav className="flex items-center gap-4">
+          </>
+        }
+        rightSlot={
+          <nav className="flex items-center gap-3 sm:gap-4">
             <Link href="/sign-in">
               <Button variant="ghost">Sign In</Button>
             </Link>
@@ -20,8 +22,8 @@ export default function LandingPage() {
               <Button>Get Started</Button>
             </Link>
           </nav>
-        </div>
-      </header>
+        }
+      />
 
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-24 md:py-32">
