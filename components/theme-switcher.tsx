@@ -35,7 +35,7 @@ export function ThemeSwitcher() {
     setIsMounted(true)
   }, [])
 
-  const activeValue = isMounted ? theme ?? 'system' : 'tokyo-night'
+  const activeValue = isMounted ? theme ?? 'system' : 'system'
   const activeOption = THEME_OPTIONS.find((option) => option.value === activeValue) ?? THEME_OPTIONS[0]
   const ActiveIcon = activeOption.icon
 
