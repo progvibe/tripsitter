@@ -9,7 +9,8 @@ import { ItineraryView } from "@/components/trip/itinerary-view"
 import { ChatPanel } from "@/components/trip/chat-panel"
 import { AiPanel } from "@/components/trip/ai-panel"
 
-export default async function TripPage({ params }: { params: { tripId: string } }) {
+export default async function TripPage({ params }: { params: Promise<{ tripId: string }> }) {
+  const { tripId } = await params
   const user = await getCurrentUser()
 
   if (!user) {
@@ -18,7 +19,7 @@ export default async function TripPage({ params }: { params: { tripId: string } 
 
   // Get trip details
   const trip = await db.query.trips.findFirst({
-    where: eq(trips.id, params.tripId),
+    where: eq(trips.id, tripId),
     with: {
       createdBy: true,
       members: {
@@ -41,7 +42,7 @@ export default async function TripPage({ params }: { params: { tripId: string } 
 
   // Get activities grouped by day
   const tripActivities = await db.query.activities.findMany({
-    where: eq(activities.tripId, params.tripId),
+    where: eq(activities.tripId, tripId),
     with: {
       createdBy: true,
     },
