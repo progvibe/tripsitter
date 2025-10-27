@@ -74,6 +74,41 @@
   --sidebar-ring: oklch(0.439 0 0);
 }
 
+.tokyo-night {
+  --background: #1a1b26;
+  --foreground: #c0caf5;
+  --card: #1f2335;
+  --card-foreground: #c0caf5;
+  --popover: #1f2335;
+  --popover-foreground: #c0caf5;
+  --primary: #7aa2f7;
+  --primary-foreground: #1a1b26;
+  --secondary: #414868;
+  --secondary-foreground: #c0caf5;
+  --muted: #24283b;
+  --muted-foreground: #a9b1d6;
+  --accent: #bb9af7;
+  --accent-foreground: #1a1b26;
+  --destructive: #f7768e;
+  --destructive-foreground: #1a1b26;
+  --border: #2f334d;
+  --input: #2f334d;
+  --ring: #7aa2f7;
+  --chart-1: #7aa2f7;
+  --chart-2: #9ece6a;
+  --chart-3: #bb9af7;
+  --chart-4: #ff9e64;
+  --chart-5: #f7768e;
+  --sidebar: #16161e;
+  --sidebar-foreground: #c0caf5;
+  --sidebar-primary: #7aa2f7;
+  --sidebar-primary-foreground: #1a1b26;
+  --sidebar-accent: #414868;
+  --sidebar-accent-foreground: #c0caf5;
+  --sidebar-border: #2f334d;
+  --sidebar-ring: #7aa2f7;
+}
+
 @theme inline {
   --font-sans: "Geist", "Geist Fallback";
   --font-mono: "Geist Mono", "Geist Mono Fallback";

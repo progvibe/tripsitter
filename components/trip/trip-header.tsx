@@ -1,13 +1,15 @@
 "use client"
 
 import Link from "next/link"
-import { Calendar, MapPin, Users, Share2, Settings, ChevronLeft } from "lucide-react"
+import { useState } from "react"
+import { Calendar, MapPin, Users, Share2, Settings, ChevronLeft, MessageSquare } from "lucide-react"
+
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { useState } from "react"
 import { ShareTripDialog } from "./share-trip-dialog"
 import { OnlineUsers } from "./online-users"
 import { TripSettingsDialog } from "./trip-settings-dialog"
+import { ThemeSwitcher } from "@/components/theme-switcher"
 
 interface TripHeaderProps {
   trip: {
@@ -29,10 +31,12 @@ interface TripHeaderProps {
   user: {
     id: string
     name: string | null
+    imageUrl: string | null
   }
+  onOpenMobileSidebar?: () => void
 }
 
-export function TripHeader({ trip, user }: TripHeaderProps) {
+export function TripHeader({ trip, user, onOpenMobileSidebar }: TripHeaderProps) {
   const [shareOpen, setShareOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
 
@@ -51,7 +55,8 @@ export function TripHeader({ trip, user }: TripHeaderProps) {
     <>
       <header className="border-b border-border bg-card">
         <div className="flex h-16 items-center justify-between px-4">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 sm:gap-4">
+            <ThemeSwitcher />
             <Link href="/dashboard">
               <Button variant="ghost" size="icon">
                 <ChevronLeft className="h-5 w-5" />
@@ -77,6 +82,17 @@ export function TripHeader({ trip, user }: TripHeaderProps) {
           </div>
 
           <div className="flex items-center gap-4">
+            {onOpenMobileSidebar && (
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={onOpenMobileSidebar}
+                className="lg:hidden"
+              >
+                <MessageSquare className="h-5 w-5" />
+                <span className="sr-only">Open chat</span>
+              </Button>
+            )}
             <OnlineUsers tripId={trip.id} currentUserId={user.id} />
 
             <div className="flex items-center gap-1">
