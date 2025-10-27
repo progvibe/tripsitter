@@ -6,5 +6,7 @@ export default {
   dialect: "postgresql",
   dbCredentials: {
     url: process.env.NEON_NEON_DATABASE_URL!,
+    database: 'neondb',
+    host: process.env.NEON_HOST,
   },
 } satisfies Config
