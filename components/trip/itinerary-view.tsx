@@ -61,7 +61,7 @@ export function ItineraryView({ trip, activities }: ItineraryViewProps) {
 
   return (
     <>
-      <div className="flex-1 overflow-auto p-6">
+      <div className="flex-1 overflow-auto px-4 py-6 sm:px-6">
         <div className="mb-6 flex items-center justify-between">
           <div>
             <h2 className="text-2xl font-bold">Itinerary</h2>
@@ -70,7 +70,7 @@ export function ItineraryView({ trip, activities }: ItineraryViewProps) {
         </div>
 
         {/* Days Grid */}
-        <div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
           {days.map((day) => (
             <DayColumn
               key={day}
