@@ -1,9 +1,17 @@
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
+import { redirect } from "next/navigation"
 import { ArrowRight, Users, Calendar, MessageSquare, Sparkles } from "lucide-react"
+import { Button } from "@/components/ui/button"
 import { TopBar } from "@/components/top-bar"
+import { getCurrentUser } from "@/lib/auth/get-current-user"
 
-export default function LandingPage() {
+export default async function LandingPage() {
+  const user = await getCurrentUser()
+
+  if (user) {
+    redirect("/dashboard")
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <TopBar
